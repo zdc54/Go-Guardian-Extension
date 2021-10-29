@@ -1,0 +1,66 @@
+{
+  "namespace":"com.goguardian.events.metrics.logs",
+  "type":"record",
+  "name":"LogsBatch",
+  "doc":"Represents a batch of log metrics submitted by a single extension. There is a one-to-one mapping between this avro record and a kinesis record (i.e. the kinesis record payload contains JSON which we deserialize using this schema). Note that the kinesis record contains JSON and not serialized avro binary.",
+  "fields":[
+    {
+      "name":"submissionTime",
+      "type":"long",
+      "doc":"Epoch millis that this was submitted at"
+    },
+    {
+      "name":"payload",
+      "type":{
+        "type":"array",
+        "items":{
+          "type":"record",
+          "name":"Log",
+          "doc":"The log metric representation.",
+          "fields":[
+            {
+              "name":"logMessage",
+              "type":"string",
+              "doc":"The string log that was written by the extension",
+              "default":""
+            },
+            {
+              "name":"level",
+              "type":{
+                "type":"enum",
+                "name":"LogLevelType",
+                "symbols":["INFO", "WARN", "ERROR"],
+                "doc":"The level that this log represents"
+              },
+              "default":"INFO"
+            },
+            {
+              "name":"timestampMs",
+              "type":"long",
+              "doc":"The timestamp that this log was collected",
+              "default":0
+            },
+            {
+              "name":"errorName",
+              "type":["null", "string"],
+              "doc":"The specific type of Error that was thrown",
+              "default":null
+            },
+            {
+              "name":"errorMessage",
+              "type":["null", "string"],
+              "doc":"The message associated with the thrown Error",
+              "default":null
+            },
+            {
+              "name":"errorStack",
+              "type":["null", "string"],
+              "doc":"The stack trace associated with the thrown Error",
+              "default":null
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

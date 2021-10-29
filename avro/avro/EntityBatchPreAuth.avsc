@@ -1,0 +1,542 @@
+{
+  "namespace": "com.goguardian.events",
+  "type": "record",
+  "name": "EntityBatchPreAuth",
+  "doc": "Represents a batch of EntityPreAuths submitted by a single extension. There is a one-to-one mapping between this binary avro record and a kinesis record's body/payload.",
+  "fields": [
+    {
+      "name": "type",
+      "type": {
+        "type": "enum",
+        "name": "KinesisRecordType",
+        "symbols": [
+          "ENTITIES"
+        ],
+        "doc": "What is the type of this kinesis record"
+      },
+      "default": "ENTITIES"
+    },
+    {
+      "name": "compRand",
+      "type": "string",
+      "doc": "The compRand from the extension"
+    },
+    {
+      "name": "submissionTime",
+      "type": "long",
+      "doc": "Epoch millis that this was submitted at"
+    },
+    {
+      "name": "extensionVersion",
+      "type": "string",
+      "doc": "The extension version (e.g. '2.0.2.9')"
+    },
+    {
+      "name": "userAgent",
+      "type": "string",
+      "doc": "The browser user agent"
+    },
+    {
+      "name": "ip",
+      "type": "long",
+      "doc": "The ipv4 represented as a long"
+    },
+    {
+      "name": "deviceId",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null,
+      "doc": "The unique device identifier that this entity was written on"
+    },
+    {
+      "name": "payload",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "EntityPreAuth",
+          "doc": "The pre-authenticated entity representation.",
+          "fields": [
+            {
+              "name": "seqId",
+              "type": "long",
+              "doc": "The entity sequence id according to the extension. Note this used to be an int before 8/14/2015"
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "doc": "The URL that was visited"
+            },
+            {
+              "name": "flaggedActivity",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "FlaggedActivityMetadata",
+                  "doc": "Metadata related to flagged activity",
+                  "fields": [
+                    {
+                      "name": "isNew",
+                      "type": "boolean",
+                      "doc": "Whether this metadata item is new"
+                    },
+                    {
+                      "name": "severity",
+                      "type": "double",
+                      "doc": "The extension-generated severity of this metadata"
+                    },
+                    {
+                      "name": "image",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null,
+                      "doc": "The UUID of the image associated with this flagged activity event this metadata"
+                    },
+                    {
+                      "name": "categoryId",
+                      "type": "int",
+                      "doc": "Category of this flagged activity, based on its flagged terms. E.g. pornography, drugs, etc."
+                    },
+                    {
+                      "name": "flags",
+                      "type": {
+                        "type": "array",
+                        "items": {
+                          "name": "FlaggedActivityMetadataFlag",
+                          "type": "record",
+                          "doc": "Represents a single flagged word",
+                          "fields": [
+                            {
+                              "name": "term",
+                              "type": "string",
+                              "doc": "The flagged word"
+                            },
+                            {
+                              "name": "count",
+                              "type": "int",
+                              "doc": "The number of times the word appears on the page "
+                            },
+                            {
+                              "name": "severity",
+                              "type": "double",
+                              "doc": "The default severity associated with the word"
+                            },
+                            {
+                              "name": "calculatedSeverity",
+                              "type": "double",
+                              "doc": "The computed severity of the word(s)"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "keyFlags",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "KeyFlagMetadata",
+                  "doc": "Metadata related to key flags activity",
+                  "fields": [
+                    {
+                      "name": "isNew",
+                      "type": "boolean",
+                      "doc": "Whether this metadata item is new"
+                    },
+                    {
+                      "name": "needle",
+                      "type": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "name": "needleItem",
+                          "doc": "A keyflag needle found in this haystack"
+                        }
+                      },
+                      "doc": "An array of needles flagged in this haystack"
+                    },
+                    {
+                      "name": "haystack",
+                      "type": "string",
+                      "doc": "The context in which the needle was found"
+                    },
+                    {
+                      "name": "uuid",
+                      "type": "string",
+                      "doc": "A UUID corresponding to the input on the page. When the input changes, this UUID is regenerated"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "searches",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "SearchMetadata",
+                  "doc": "Metadata related to searches",
+                  "fields": [
+                    {
+                      "name": "isNew",
+                      "type": "boolean",
+                      "doc": "Whether this metadata item is new"
+                    },
+                    {
+                      "name": "searchTerms",
+                      "type": "string",
+                      "doc": "The terms that were searched"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "videos",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "VideoMetadata",
+                  "doc": "Metadata related to videos",
+                  "fields": [
+                    {
+                      "name": "isNew",
+                      "type": "boolean",
+                      "doc": "Whether this metadata item is new"
+                    },
+                    {
+                      "name": "title",
+                      "type": "string",
+                      "doc": "The title of the video"
+                    },
+                    {
+                      "name": "uploader",
+                      "type": "string",
+                      "doc": "The video uploader"
+                    },
+                    {
+                      "name": "categoryId",
+                      "type": "int",
+                      "doc": "The youtube category id"
+                    },
+                    {
+                      "name": "rating",
+                      "type": "int",
+                      "doc": "The youtube rating"
+                    },
+                    {
+                      "name": "description",
+                      "type": "string",
+                      "doc": "The description of the video"
+                    },
+                    {
+                      "name": "channelId",
+                      "type": "string",
+                      "doc": "The id of the youtube channel"
+                    },
+                    {
+                      "name": "category",
+                      "type": "string",
+                      "doc": "The verbose name of the category"
+                    },
+                    {
+                      "name": "uri",
+                      "type": "string",
+                      "doc": "The full youtube video URI"
+                    },
+                    {
+                      "name": "videoId",
+                      "type": "string",
+                      "doc": "The youtube video id"
+                    },
+                    {
+                      "name": "type",
+                      "type": {
+                        "type": "enum",
+                        "name": "VideoType",
+                        "symbols": [
+                          "YOUTUBE"
+                        ],
+                        "doc": "Where is this youtube video sourced from"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "docs",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "DocMetadata",
+                  "doc": "Metadata related to docs",
+                  "fields": [
+                    {
+                      "name": "isNew",
+                      "type": "boolean",
+                      "doc": "Whether this metadata item is new"
+                    },
+                    {
+                      "name": "title",
+                      "type": "string",
+                      "doc": "The title of the document"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "name": "faviconUrl",
+              "type": [
+                "null",
+                "string"
+              ],
+              "default": null,
+              "doc": "The favicon url associated with this entity"
+            },
+            {
+              "name": "title",
+              "type": [
+                "null",
+                "string"
+              ],
+              "default": null,
+              "doc": "The title associated with this entity"
+            },
+            {
+              "name": "tabId",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "The tabId that this entity came from"
+            },
+            {
+              "name": "blockedSite",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "BlockedMetadata",
+                  "doc": "Metadata related to blocked_sites",
+                  "fields": [
+                    {
+                      "name": "isNew",
+                      "type": [
+                        "null",
+                        "boolean"
+                      ],
+                      "default": null,
+                      "doc": "Whether this metadata item is new"
+                    },
+                    {
+                      "name": "categoryId",
+                      "type": "int",
+                      "doc": "The category id that blocked this entity"
+                    }
+                  ]
+                }
+              },
+              "default": []
+            },
+            {
+              "name": "viewings",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "ViewingMetadata",
+                  "doc": "Metadata related to viewings",
+                  "fields": [
+                    {
+                      "name": "startTimeMs",
+                      "type": "long",
+                      "doc": "The epoch timestamp when this viewing started"
+                    },
+                    {
+                      "name": "endTimeMs",
+                      "type": "long",
+                      "doc": "The epoch timestamp when this viewing ended"
+                    },
+                    {
+                      "name": "isDirty",
+                      "type": "boolean",
+                      "doc": "Whether this viewing needs to be updated/inserted in the database"
+                    },
+                    {
+                      "name": "lastSubmissionTimeMs",
+                      "type": [
+                        "null",
+                        "long"
+                      ],
+                      "default": null,
+                      "doc": "If present, represents the last time this viewing was sent to Kinesis"
+                    }
+                  ]
+                }
+              },
+              "default": []
+            },
+            {
+              "name": "isNew",
+              "type": [
+                "null",
+                "boolean"
+              ],
+              "default": null,
+              "doc": "Represents whether this entity has been submitted to Kinesis before"
+            },
+            {
+              "name": "classroomIds",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "int",
+                  "name": "classroomId",
+                  "doc": "A list of GG4T classroom IDs that this entity was generated in"
+                }
+              },
+              "default": []
+            },
+            {
+              "name": "classroomSessionIds",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "int",
+                  "name": "classroomSessionId",
+                  "doc": "A list of GG4T classroom session IDs that this entity was generated in"
+                }
+              },
+              "default": []
+            },
+            {
+              "name": "isLocked",
+              "type": [
+                "null",
+                "boolean"
+              ],
+              "default": null,
+              "doc": "Represents whether the entity was generated in a locked state (GG4T)"
+            },
+            {
+              "name": "tabs",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "TabMetadata",
+                  "doc": "Metadata related to open tabs",
+                  "fields": [
+                    {
+                      "name": "url",
+                      "type": "string",
+                      "doc": "The URL of the open tab"
+                    },
+                    {
+                      "name": "title",
+                      "type": "string",
+                      "doc": "The title of the open tab"
+                    },
+                    {
+                      "name": "faviconUrl",
+                      "type": "string",
+                      "doc": "The favicon url associated with this open tab"
+                    },
+                    {
+                      "name": "isActive",
+                      "type": "boolean",
+                      "doc": "Represents whether this tab is the active one"
+                    },
+                    {
+                      "name": "id",
+                      "type": "int",
+                      "doc": "A numeric identifier for this tab"
+                    }
+                  ]
+                }
+              },
+              "default": [],
+              "doc": "An array representing the currently open tabs on the device (GG4T)"
+            },
+            {
+              "name": "isProxy",
+              "type": [
+                "null",
+                "boolean"
+              ],
+              "default": null,
+              "doc": "Whether this entity represents a proxy website"
+            },
+            {
+              "name": "sourceType",
+              "type": "int",
+              "default": 0,
+              "doc": "describes EntityAuth generation method"
+            },
+            {
+              "name": "tivanIds",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "long",
+                  "name": "tivanId",
+                  "doc": "Tivan ID"
+                }
+              },
+              "default": [],
+              "doc": "Associated IDs for tivan"
+            },
+            {
+              "name": "beaconIds",
+              "type": {
+                "type": "array",
+                "items": {
+                  "type": "long",
+                  "name": "beaconId",
+                  "doc": "Beacon report ID"
+                }
+              },
+              "default": [],
+              "doc": "Associated IDs for beacon reports"
+            },
+            {
+              "name": "offTaskScores",
+              "type": {
+                "type": "map",
+                "values": "double"
+              },
+              "default": {},
+              "doc": "Map of teacher session to off task score"
+            },
+            {
+              "name": "dataScienceTags",
+              "type": {
+                "type": "map",
+                "values": "string"
+              },
+              "default": {},
+              "doc": "This is an unstructured map of string to string for do more of an adhoc data associations to EntityAuth"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
+
