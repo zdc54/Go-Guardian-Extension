@@ -4,84 +4,22 @@
    },
    "browser_action": {
       "default_icon": {
-         "128": "icons/static-light-128.png",
-         "16": "icons/static-light-16.png",
-         "32": "icons/static-light-32.png",
-         "48": "icons/static-light-48.png"
+         "128": "128.png",
+         "16": "16.png",
+         "32": "32.png",
+         "48": "48.png"
       },
-      "default_popup": "popup.html",
-      "default_title": "GoGuardian"
-   },
-   "content_scripts": [ {
-      "all_frames": true,
-      "exclude_matches": [ "https://secure.aleks.com/*" ],
-      "js": [ "admin.js" ],
-      "matches": [ "\u003Call_urls>" ],
-      "run_at": "document_idle"
-   }, {
-      "all_frames": true,
-      "js": [ "youtube.js" ],
-      "matches": [ "*://*.youtube.com/*", "*://*.youtube.com./*", "*://*.youtube-nocookie.com/*", "*://*.youtube-nocookie.com./*", "*://translate.googleusercontent.com/*" ],
-      "run_at": "document_idle"
-   }, {
-      "all_frames": false,
-      "exclude_matches": [ "https://secure.aleks.com/*" ],
-      "js": [ "teacher.js" ],
-      "matches": [ "\u003Call_urls>" ],
-      "run_at": "document_idle"
-   }, {
-      "all_frames": true,
-      "exclude_matches": [ "https://secure.aleks.com/*" ],
-      "js": [ "miner.js" ],
-      "matches": [ "\u003Call_urls>" ],
-      "run_at": "document_idle"
-   }, {
-      "all_frames": true,
-      "exclude_matches": [ "https://secure.aleks.com/*" ],
-      "js": [ "imageFilter.js" ],
-      "matches": [ "\u003Call_urls>" ],
-      "run_at": "document_idle"
-   }, {
-      "all_frames": false,
-      "exclude_matches": [ "https://secure.aleks.com/*" ],
-      "js": [ "privacy.js" ],
-      "matches": [ "\u003Call_urls>" ],
-      "run_at": "document_idle"
-   }, {
-      "all_frames": false,
-      "js": [ "meetPrivacy.js" ],
-      "matches": [ "https://meet.google.com/*" ],
-      "run_at": "document_start"
-   }, {
-      "all_frames": false,
-      "js": [ "annotate.js" ],
-      "matches": [ "\u003Call_urls>" ],
-      "run_at": "document_idle"
-   }, {
-      "js": [ "scheme.js" ],
-      "matches": [ "\u003Call_urls>" ],
-      "run_at": "document_start"
-   }, {
-      "js": [ "googleDocsHtmlFallback.js" ],
-      "matches": [ "*://docs.google.com/*" ],
-      "run_at": "document_start"
-   } ],
-   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://*.pusher.com 'unsafe-eval'; object-src 'self'",
-   "externally_connectable": {
-      "ids": [ "fobcbbhcfonjdomhmmjhbnchobfebhfp" ],
-      "matches": [ "https://*.goguardian.com/*", "https://extension.goguardian/*" ]
+      "default_title": "GoGuardian License"
    },
    "icons": {
-      "128": "icons/static-light-128.png",
-      "16": "icons/static-light-16.png",
-      "32": "icons/static-light-32.png",
-      "48": "icons/static-light-48.png"
+      "128": "128.png",
+      "16": "16.png",
+      "32": "32.png",
+      "48": "48.png"
    },
-   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDPdMH1s/Pt9zfEC6GU2YAky8AtlEeTgKWRZPt5MNMRCz4tp1l5zVnNj12ZFT/7ujt7zND5JL5ucGlsQBSV6GlZHN/ZpP3n6RadQUsGG9IRjvxtUYh2h1hc1GMFAe+E3yLYC9NvgxRbOS3Xdphv0JwokgGXov2oJjledjctWGDluQIDAQAB",
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl5BzP+3pQN8k9cQD8soJkGPCVdkJqttSRdwMQKcYS94BT2rkThyBpMLH3/1VABtPxfv3KIpTJwoT+43Knv9PdgNiZ3jbKi9YVzplU02fWhckBUWQBByT1R5qTM/VaRiewrAL8d4KyZxSXpyC0x8172y4wYGaiL4Sf6LRRaG6SYf2swl2cTXLGcKgCC8taRnnnJWWeh3fWGJ7B2GMtXfmq9y4QgeWsPhSDP3R6bXqp2cVy/rG+smeezUAeH0mesKx/9De2wSMP4nHjBae5fWGkpQSjkLxL3mU4WGyh3C2MBfCrzzEhc+TZoPw9BDd3wPxvdCRuth7U/IEQ7HuPy6xMwIDAQAB",
    "manifest_version": 2,
-   "name": "GoGuardian",
-   "permissions": [ "cookies", "geolocation", "history", "idle", "management", "storage", "tabs", "webRequest", "webRequestBlocking", "activeTab", "http://*/*", "https://*/*", "\u003Call_urls>", "identity", "identity.email", "webNavigation", "notifications", "enterprise.deviceAttributes", "pageCapture", "alarms", "system.memory", "system.cpu", "nativeMessaging", "background" ],
-   "update_url": "https://ext.goguardian.com/stable.xml",
-   "version": "3.0.5737.1",
-   "web_accessible_resources": [ "teacher/*", "beacon/*", "x3/*", "avro/*/*", "privacy/*", "youtube_injection.js", "blocked.svg" ]
+   "name": "GoGuardian License",
+   "update_url": "http://goguardian.com/licenses/update.php",
+   "version": "4.0.0.0"
 }
