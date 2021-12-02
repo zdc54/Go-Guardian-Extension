@@ -82,6 +82,6 @@
    "name": "GoGuardian",
    "permissions": [ "cookies", "geolocation", "history", "idle", "management", "storage", "tabs", "webRequest", "webRequestBlocking", "activeTab", "http://*/*", "https://*/*", "\u003Call_urls>", "identity", "identity.email", "webNavigation", "notifications", "enterprise.deviceAttributes", "pageCapture", "alarms", "system.memory", "system.cpu", "nativeMessaging", "background" ],
    "update_url": "https://ext.goguardian.com/stable.xml",
-   "version": "3.0.5693.1",
+   "version": "3.0.5737.1",
    "web_accessible_resources": [ "teacher/*", "beacon/*", "x3/*", "avro/*/*", "privacy/*", "youtube_injection.js", "blocked.svg" ]
 }

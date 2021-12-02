@@ -271,6 +271,55 @@
                         ],
                         "doc": "Where is this youtube video sourced from"
                       }
+                    },
+                    {
+                      "name": "blockMetadata",
+                      "type": [
+                        "null",
+                        {
+                          "type": "record",
+                          "name": "VideoBlockMetadata",
+                          "doc": "Metadata describing video block",
+                          "fields": [
+                            {
+                              "name": "reason",
+                              "type": {
+                                "type": "enum",
+                                "name": "VideoBlockMetadataReasonType",
+                                "symbols": [
+                                  "ADMIN_YOUTUBE_CATEGORY",
+                                  "ADMIN_YOUTUBE_CHANNEL",
+                                  "ADMIN_YOUTUBE_KEYWORD",
+                                  "ADMIN_YOUTUBE_VIDEO",
+                                  "ADMIN_YOUTUBE_AGE_RESTRICTION",
+                                  "ADMIN_YOUTUBE_SAFE_MODE",
+                                  "UNKNOWN"
+                                ]
+                              },
+                              "doc": "Agent blocked the video"
+                            },
+                            {
+                              "name": "adminPolicyId",
+                              "type": [
+                                "null",
+                                "long"
+                              ],
+                              "doc": "Reference to an admin video policy causing the block",
+                              "default": null
+                            },
+                            {
+                              "name": "adminFilterId",
+                              "type": [
+                                "null",
+                                "long"
+                              ],
+                              "doc": "Reference to a filter inside of admin video policy causing the block",
+                              "default": null
+                            }
+                          ]
+                        }
+                      ],
+                      "default": null
                     }
                   ]
                 }
@@ -348,6 +397,95 @@
                       "name": "categoryId",
                       "type": "int",
                       "doc": "The category id that blocked this entity"
+                    },
+                    {
+                      "name": "originalUrl",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "doc": "Original URL of the blocked entity",
+                      "default": null
+                    },
+                    {
+                      "name": "reason",
+                      "type": [
+                        "null", 
+                        {
+                          "type": "enum",
+                          "name": "BlockedSiteReasonType",
+                          "symbols": [
+                            "BLOCK_WEB_PROXIES",
+                            "BLOCK_DIRECT_IP_ACCESS",
+                            "ADMIN_SITE_FILTER",
+                            "ADMIN_SITE_CATEGORY_FILTER",
+                            "ADMIN_SAFE_MODE",
+                            "PARENT_SITE_FILTER",
+                            "PARENT_PAUSE",
+                            "PARENT_SCHEDULED_PAUSE",
+                            "X3_REPORT",
+                            "TEACHER_SCENE",
+                            "UNKNOWN",
+                            "BLOCK_CONSUMER_ACCOUNTS"
+                          ]
+                        }
+                      ],
+                      "doc": "Agent blocked the entity",
+                      "default": null
+                    },
+                    {
+                      "name": "adminPolicyId",
+                      "type": [
+                        "null", 
+                        "long"
+                      ],
+                      "doc": "Reference to an admin policy causing the block, reason should be ADMIN_SITE_FILTER or ADMIN_SITE_CATEGORY_FILTER",
+                      "default": null
+                    },
+                    {
+                      "name": "adminFilterId",
+                      "type": [
+                        "null", 
+                        "long"
+                      ],
+                      "doc": "Reference to a filter inside of admin policy causing the block, reason should be ADMIN_SITE_FILTER or ADMIN_SITE_CATEGORY_FILTER",
+                      "default": null
+                    },
+                    {
+                      "name": "parentFilterId",
+                      "type": [
+                        "null", 
+                        "long"
+                      ],
+                      "doc": "Reference to a parent policy causing the block, reason should be PARENT_SITE_FILTER, PARENT_PAUSE or PARENT_SCHEDULED_PAUSE",
+                      "default": null
+                    },
+                    {
+                      "name": "x3ReportPublicId",
+                      "type": [
+                        "null", 
+                        "string"
+                      ],
+                      "doc": "Reference to an X3 report causing the block, reason should be X3_REPORT (UUID string)",
+                      "default": null
+                    },
+                    {
+                      "name": "teacherSceneId",
+                      "type": [
+                        "null", 
+                        "long"
+                      ],
+                      "doc": "Reference to a teacher scene causing the block, reason should be TEACHER_SCENE",
+                      "default": null
+                    },
+                    {
+                      "name": "teacherSceneFilterId",
+                      "type": [
+                        "null", 
+                        "long"
+                      ],
+                      "doc": "Reference to a specific filter of teacher scene causing the block, reason should be TEACHER_SCENE",
+                      "default": null
                     }
                   ]
                 }
@@ -539,4 +677,3 @@
     }
   ]
 }
-
