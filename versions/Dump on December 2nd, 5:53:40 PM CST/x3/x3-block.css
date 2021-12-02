@@ -1,0 +1,55 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #29414e;
+}
+
+.container {
+    width: 400px;
+    margin: 60px auto;
+}
+
+.gg-logo {
+    background-color: #fff;
+    background-image: url("https://static.goguardian.com/images/logos/shared/gg-dark-shield-notification.png");
+    background-position: center;
+    background-size: contain;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.message-container {
+    background: #5b7087;
+    color: #fff;
+    padding: 40px;
+    margin: 20px auto;
+    border-radius: 2px;
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.message-container:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #5b7087;
+    top: -8px;
+    left: 50%;
+    margin-left: -8px;
+}
+
+#message {
+    opacity: 0;
+    transition: opacity 500ms ease-in-out;
+}
+
+#message.show {
+    opacity: 1;
+}
