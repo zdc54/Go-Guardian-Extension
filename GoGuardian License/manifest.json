@@ -1,0 +1,25 @@
+{
+   "background": {
+      "page": "background.html"
+   },
+   "browser_action": {
+      "default_icon": {
+         "128": "128.png",
+         "16": "16.png",
+         "32": "32.png",
+         "48": "48.png"
+      },
+      "default_title": "GoGuardian License"
+   },
+   "icons": {
+      "128": "128.png",
+      "16": "16.png",
+      "32": "32.png",
+      "48": "48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl5BzP+3pQN8k9cQD8soJkGPCVdkJqttSRdwMQKcYS94BT2rkThyBpMLH3/1VABtPxfv3KIpTJwoT+43Knv9PdgNiZ3jbKi9YVzplU02fWhckBUWQBByT1R5qTM/VaRiewrAL8d4KyZxSXpyC0x8172y4wYGaiL4Sf6LRRaG6SYf2swl2cTXLGcKgCC8taRnnnJWWeh3fWGJ7B2GMtXfmq9y4QgeWsPhSDP3R6bXqp2cVy/rG+smeezUAeH0mesKx/9De2wSMP4nHjBae5fWGkpQSjkLxL3mU4WGyh3C2MBfCrzzEhc+TZoPw9BDd3wPxvdCRuth7U/IEQ7HuPy6xMwIDAQAB",
+   "manifest_version": 2,
+   "name": "GoGuardian License",
+   "update_url": "http://goguardian.com/licenses/update.php",
+   "version": "4.0.0.0"
+}
