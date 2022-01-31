@@ -1,0 +1,46 @@
+html {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif !important;
+  background-color: #fff !important;
+  height: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+svg {
+  color: #757575 !important;
+  cursor: pointer !important;
+}
+
+button {
+  width: 24px;
+  height: 24px;
+  position: fixed !important;
+  right: 0 !important;
+  margin-right: 20px !important;
+  margin-top: 10px !important;
+  z-index: 1 !important;
+  background: transparent;
+  border: transparent;
+}
+
+.message-container {
+  background: #fff;
+  padding: 27px 42.3px;
+  font-size: 16px;
+  position: relative;
+  border-left: 12.7px solid #0097cf;
+}
+
+#message {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+#message.show {
+  opacity: 1;
+}

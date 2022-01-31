@@ -1,0 +1,58 @@
+{
+  "namespace":"com.goguardian.events.metrics.statsd",
+  "type":"record",
+  "name":"StatsDBatch",
+  "doc":"Represents a batch of statsd metrics submitted by a single extension. There is a one-to-one mapping between this avro record and a kinesis record (i.e. the kinesis record payload contains JSON which we deserialize using this schema). Note that the kinesis record contains JSON and not serialized avro binary.",
+  "fields":[
+    {
+      "name":"submissionTime",
+      "type":"long",
+      "doc":"Epoch millis that this was submitted at"
+    },
+    {
+      "name":"payload",
+      "type":{
+        "type":"array",
+        "items":{
+          "type":"record",
+          "name":"StatsDMetric",
+          "doc":"The statsd metric representation.",
+          "fields":[
+            {
+              "name":"name",
+              "type":"string",
+              "doc":"The name to submit this metric under",
+              "default":""
+            },
+            {
+              "name":"type",
+              "type":{
+                "type":"enum",
+                "name":"MetricType",
+                "symbols":[
+                  "COUNT",
+                  "HISTOGRAM",
+                  "SET"
+                ],
+                "doc":"The type of metric"
+              },
+              "default":"COUNT"
+            },
+            {
+              "name":"timestampMs",
+              "type":"long",
+              "doc":"The timestamp that this metric was collected",
+              "default":0
+            },
+            {
+              "name":"value",
+              "type":"string",
+              "doc":"The value of the metric when it was collected",
+              "default":""
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
